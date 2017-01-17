@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ModelUpload.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Premier Partner.dbo.Upload' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Upload">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Vendor" Type="nvarchar" MaxLength="50" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+    <Property Name="AssetType" Type="nvarchar" MaxLength="50" />
+    <Property Name="ClickURL" Type="nvarchar" MaxLength="255" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityContainer Name="ModelUploadStoreContainer">
+    <EntitySet Name="Upload" EntityType="Self.Upload" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Upload].[ID] AS [ID], 
+    [Upload].[Vendor] AS [Vendor], 
+    [Upload].[Brand] AS [Brand], 
+    [Upload].[AssetType] AS [AssetType], 
+    [Upload].[ClickURL] AS [ClickURL], 
+    [Upload].[Notes] AS [Notes]
+    FROM [dbo].[Upload] AS [Upload]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
