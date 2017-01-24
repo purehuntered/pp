@@ -10,7 +10,8 @@ namespace IdentitySample.Models
     public class ApplicationUser : IdentityUser
     {
         public string Brand { get; internal set; }
-        public string Vendor { get; internal set; }
+        public string FirstNm { get; internal set; }
+        public string LastNm { get; internal set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

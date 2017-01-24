@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Upload">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Guid" Nullable="false" />
+    <Property Name="AssetType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ClickURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="UserLog" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="StartDT" Type="DateTime" Precision="3" />
+    <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CopyHL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CopyBody" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="EndDT" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="Premier_PartnerEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Uploads" EntityType="Self.Upload" />
+  </EntityContainer>
+</Schema>

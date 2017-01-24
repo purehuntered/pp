@@ -14,11 +14,14 @@ namespace WebPremPar
     
     public partial class Upload
     {
-        public string ID { get; set; }
-        public string Vendor { get; set; }
-        public string Brand { get; set; }
+        public System.Guid ID { get; set; }
         public string AssetType { get; set; }
         public string ClickURL { get; set; }
-        public string Notes { get; set; }
+        public string UserLog { get; set; }
+        public Nullable<System.DateTime> StartDT { get; set; }
+        public string BrandName { get; set; }
+        public string CopyHL { get; set; }
+        public string CopyBody { get; set; }
+        public Nullable<System.DateTime> EndDT { get; set; }
     }
 }

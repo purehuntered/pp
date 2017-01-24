@@ -11,10 +11,35 @@
     <h4>Create a new account.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Brand, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Brand, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstNm, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FirstNm, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastNm, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.LastNm, new { @class = "form-control" })
+        </div>
+    </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Phone, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
@@ -30,18 +55,8 @@
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Vendor, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Vendor, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Brand, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Brand, new { @class = "form-control" })
-        </div>
-    </div>
+
+
 
 
     <div class="form-group">

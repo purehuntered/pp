@@ -153,10 +153,12 @@ namespace IdentitySample.Controllers
         //
         // POST: /Account/Register
         // IF MORE FIELDS ARE NEEDED, REFER TO https://msdn.microsoft.com/en-us/data/jj591621
+        // 0. Add the new fields to AccountViewModels.cs
         // 1. DELETE THE MIGRATIONS FOLDER
         // 2. RUN 2 COMMANDS IN THE PACKAGE MANAGER CONSOLE 
-        //  a. Enable-Migrations -EnableAutomaticMigrations
-        //  b. Update-Database
+        //  a. Enable-Migrations -ContextTypeName IdentitySample.Models.ApplicationDbContext
+        //  b. Add-Migration migrate
+        //  c. Update-Database
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -164,7 +166,7 @@ namespace IdentitySample.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Vendor = model.Vendor, Brand = model.Brand };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstNm = model.FirstNm, LastNm = model.LastNm,  Brand = model.Brand, PhoneNumber = model.Phone };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

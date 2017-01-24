@@ -67,3 +67,5 @@ c:\users\hhoyt\documents\visual studio 2015\Projects\WebPremPar\WebPremPar\bin\S
 c:\users\hhoyt\documents\visual studio 2015\Projects\WebPremPar\WebPremPar\obj\Debug\WebPremPar.csprojResolveAssemblyReference.cache
 c:\users\hhoyt\documents\visual studio 2015\Projects\WebPremPar\WebPremPar\obj\Debug\WebPremPar.dll
 c:\users\hhoyt\documents\visual studio 2015\Projects\WebPremPar\WebPremPar\obj\Debug\WebPremPar.pdb
+C:\Users\hhoyt\documents\visual studio 2015\Projects\WebPremPar\WebPremPar\obj\Debug\WebPremPar.Migrations.migrate.resources
+C:\Users\hhoyt\documents\visual studio 2015\Projects\WebPremPar\WebPremPar\obj\Debug\WebPremPar.csproj.GenerateResource.Cache

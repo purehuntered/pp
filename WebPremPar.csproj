@@ -175,27 +175,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ModelUpload.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelUpload.Context.cs</LastGenOutput>
+      <DependentUpon>ModelUpload.edmx</DependentUpon>
+    </Content>
+    <Content Include="ModelUpload.edmx.diagram">
+      <DependentUpon>ModelUpload.edmx</DependentUpon>
+    </Content>
+    <Content Include="ModelUpload.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModelUpload.cs</LastGenOutput>
+      <DependentUpon>ModelUpload.edmx</DependentUpon>
+    </Content>
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Upload.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Upload.edmx</DependentUpon>
-      <LastGenOutput>Upload.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Upload.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Upload.edmx</DependentUpon>
-      <LastGenOutput>Upload1.cs</LastGenOutput>
-    </Content>
     <Content Include="Views\Upload\Index.cshtml" />
     <Content Include="Views\Upload\Upload.cshtml" />
-    <EntityDeploy Include="Upload.edmx">
+    <EntityDeploy Include="ModelUpload.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Upload.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelUpload.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Upload.edmx.diagram">
-      <DependentUpon>Upload.edmx</DependentUpon>
-    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -228,7 +228,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
@@ -282,36 +284,45 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701241509349_migrate.cs" />
+    <Compile Include="Migrations\201701241509349_migrate.Designer.cs">
+      <DependentUpon>201701241509349_migrate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\UploadModel.cs" />
+    <Compile Include="ModelUpload.Context.cs">
+      <DependentUpon>ModelUpload.Context.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="ModelUpload.cs">
+      <DependentUpon>ModelUpload.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="ModelUpload.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ModelUpload.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\UploadController.cs" />
-    <Compile Include="Upload.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Upload.Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="Upload.cs">
-      <DependentUpon>Upload.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Upload.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Upload.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Upload1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Upload.tt</DependentUpon>
+      <DependentUpon>ModelUpload.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201701241509349_migrate.resx">
+      <DependentUpon>201701241509349_migrate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

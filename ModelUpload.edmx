@@ -4,46 +4,41 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ModelUpload.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Premier Partner.dbo.Upload' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Upload">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Vendor" Type="nvarchar" MaxLength="50" />
-          <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
           <Property Name="AssetType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CopyHL" Type="nvarchar" MaxLength="255" />
+          <Property Name="CopyBody" Type="nvarchar" MaxLength="255" />
           <Property Name="ClickURL" Type="nvarchar" MaxLength="255" />
-          <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+          <Property Name="UserLog" Type="nvarchar" MaxLength="50" />
+          <Property Name="StartDT" Type="datetime" />
+          <Property Name="EndDT" Type="datetime" />
         </EntityType>
-        <EntityContainer Name="ModelUploadStoreContainer">
-          <EntitySet Name="Upload" EntityType="Self.Upload" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Upload].[ID] AS [ID], 
-    [Upload].[Vendor] AS [Vendor], 
-    [Upload].[Brand] AS [Brand], 
-    [Upload].[AssetType] AS [AssetType], 
-    [Upload].[ClickURL] AS [ClickURL], 
-    [Upload].[Notes] AS [Notes]
-    FROM [dbo].[Upload] AS [Upload]</DefiningQuery>
-          </EntitySet>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Upload" EntityType="Self.Upload" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ModelUpload" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Upload">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Vendor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Guid" Nullable="false" />
           <Property Name="AssetType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ClickURL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UserLog" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StartDT" Type="DateTime" Precision="3" />
+          <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CopyHL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CopyBody" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EndDT" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityContainer Name="Premier_PartnerEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Uploads" EntityType="Self.Upload" />
@@ -53,16 +48,19 @@ warning 6002: The table/view 'Premier Partner.dbo.Upload' does not have a primar
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelUploadStoreContainer" CdmEntityContainer="Premier_PartnerEntities">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Premier_PartnerEntities">
           <EntitySetMapping Name="Uploads">
-            <EntityTypeMapping TypeName="ModelUpload.Upload">
+            <EntityTypeMapping TypeName="Model.Upload">
               <MappingFragment StoreEntitySet="Upload">
+                <ScalarProperty Name="EndDT" ColumnName="EndDT" />
+                <ScalarProperty Name="CopyBody" ColumnName="CopyBody" />
+                <ScalarProperty Name="CopyHL" ColumnName="CopyHL" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="StartDT" ColumnName="StartDT" />
+                <ScalarProperty Name="UserLog" ColumnName="UserLog" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
-                <ScalarProperty Name="Brand" ColumnName="Brand" />
                 <ScalarProperty Name="AssetType" ColumnName="AssetType" />
                 <ScalarProperty Name="ClickURL" ColumnName="ClickURL" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

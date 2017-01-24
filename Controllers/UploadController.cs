@@ -38,12 +38,12 @@ namespace WebPremPar.Views.Home
                         var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
                         file.SaveAs(path);
                         var u = new Upload();
-                        u.ID = "";
-                        u.Vendor = Request.Params["Vendor"].ToString();
-                        u.Brand = Request.Params["Brand"].ToString();
+                        u.ID = Guid.NewGuid();                        
+                        u.BrandName = Request.Params["Brand"].ToString();
                         u.AssetType = Request.Params["AssetType"].ToString();
-                        u.ClickURL = Request.Params["ClickURL"].ToString();
-                        u.Notes = Request.Params["Notes"].ToString();
+                        u.ClickURL = Request.Params["ClickURL"].ToString();                        
+                        u.UserLog = System.Web.HttpContext.Current.User.Identity.Name;
+                        u.StartDT = DateTime.Now;
                         using (var context = new Premier_PartnerEntities())
                         {
                             context.Uploads.Add(u);
