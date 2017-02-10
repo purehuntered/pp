@@ -1,0 +1,84 @@
+﻿@model WebPremPar.Models.UploadModel
+@{
+    ViewBag.Title = "Upload";
+}
+
+
+<div class="page-title">@ViewBag.Title</div>
+
+@using (Html.BeginForm("Upload", "Upload", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+   
+    <div class="form-group">
+        @Html.LabelFor(m => m.Brand, new { @class = "col-md-2 col-md-offset-2 control-label", @style = "text-align: left;" })
+        <div class="col-md-5">
+           @Html.TextBoxFor(m => m.Brand, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.AssetType, new { @class = "col-md-2 col-md-offset-2 control-label", @style = "text-align: left;" })
+        <div class="col-md-5" id="upload-dropdown">
+            @Html.DropDownListFor(model => model.AssetType, new List<SelectListItem>
+           { new SelectListItem{Text="Email", Selected=false},
+             new SelectListItem{Text="Circular", Selected=false},
+             new SelectListItem{Text="Promo Pod", Selected=false},
+             new SelectListItem{Text="Social", Selected=false}}, "Please select one", new { id="ddAsset"})
+             @Html.TextBoxFor(m => m.CopyBody, new { @class = "form-control", @placeholder = "Copy Body",style = "display: none;", id="txtCopy"  })
+             @Html.TextBoxFor(m => m.CopyBody, new { @class = "form-control", @placeholder = "Copy HL", style = "display: none;", id = "txtHL" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Duration*", new { @class = "col-md-2 col-md-offset-2 control-label", @style = "text-align: left;" })
+        <div class="col-md-3" style="display:inline; width:21%">
+            @Html.TextBoxFor(m => m.StartDt, new { @class = "form-control datepicker", @placeholder = "Start Date*" })
+        </div>
+        <div class="col-md-3" style="display:inline; width:20.5%">
+            @Html.TextBoxFor(m => m.EndDt, new { @class = "form-control datepicker", @placeholder = "End Date*" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ClickURL, new { @class = "col-md-2 col-md-offset-2 control-label", @style = "text-align: left;" })
+        <div class="col-md-5">
+            @Html.TextBoxFor(m => m.ClickURL, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="col-md-3 col-md-offset-2">
+        <label class="upload-file-button">
+            Choose Files
+            <input type="file" name="file" id="file" />
+        </label></div>
+    <br /><br />
+    <div class="col-md-3 col-md-offset-2">
+    <p id="upload-info"> Upload one file at a time. <br />
+    Only the following formats are accepted: .psd (Photoshop), .ai (Adobe Illustrator), .indd (InDesign)</p></div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="SUBMIT" id="upload-submit"/>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(function () {
+            
+            
+            $('#ddAsset').change(function () {
+                var myVal = $(this).val();
+                if (myVal == 'Social'){
+                    $('#txtCopy').show();
+                    $('#txtHL').show();
+
+                }
+                else {
+                    $('#txtCopy').hide();
+                    $('#txtHL').hide();
+                }
+            
+        });
+    });</script>
+}
+

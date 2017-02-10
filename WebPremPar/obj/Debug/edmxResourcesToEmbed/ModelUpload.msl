@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Premier_PartnerEntities">
+    <EntitySetMapping Name="Uploads">
+      <EntityTypeMapping TypeName="Model.Upload">
+        <MappingFragment StoreEntitySet="Upload">
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="EndDT" ColumnName="EndDT" />
+          <ScalarProperty Name="CopyBody" ColumnName="CopyBody" />
+          <ScalarProperty Name="CopyHL" ColumnName="CopyHL" />
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+          <ScalarProperty Name="StartDT" ColumnName="StartDT" />
+          <ScalarProperty Name="UserLog" ColumnName="UserLog" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AssetType" ColumnName="AssetType" />
+          <ScalarProperty Name="ClickURL" ColumnName="ClickURL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
