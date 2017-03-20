@@ -5,8 +5,12 @@
 
 
 <div class="page-title">@ViewBag.Title</div>
+@if (Session["errMsg"] != null && Session["errMsg"].ToString() == "10")
+{
+    Response.Write("<div style='color:red;width:800px;margin:0 auto;'>Invalid file type</div>");
+}
 
-@using (Html.BeginForm("Upload", "Upload", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Upload", "Upload", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form", id="ppForm" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary("", new { @class = "text-danger" })
@@ -29,43 +33,112 @@
              @Html.TextBoxFor(m => m.CopyBody, new { @class = "form-control", @placeholder = "Copy HL", style = "display: none;", id = "txtHL" })
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group">     
         @Html.Label("Duration*", new { @class = "col-md-2 col-md-offset-2 control-label", @style = "text-align: left;" })
         <div class="col-md-3" style="display:inline; width:21%">
-            @Html.TextBoxFor(m => m.StartDt, new { @class = "form-control datepicker", @placeholder = "Start Date*" })
+            @Html.TextBoxFor(model => model.StartDt, new {@Value = DateTime.Now, id = "datepicker", @readonly="readonly", style= "background-color:white;padding-left:5% !important;" })
+            
+            @Html.ValidationMessageFor(model => model.StartDt)
+            
         </div>
         <div class="col-md-3" style="display:inline; width:20.5%">
-            @Html.TextBoxFor(m => m.EndDt, new { @class = "form-control datepicker", @placeholder = "End Date*" })
+            @Html.TextBoxFor(model => model.EndDt, new { @Value = DateTime.Now, id = "dpEnd", @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.EndDt)
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.ClickURL, new { @class = "col-md-2 col-md-offset-2 control-label", @style = "text-align: left;" })
         <div class="col-md-5">
-            @Html.TextBoxFor(m => m.ClickURL, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.ClickURL, new { @class = "form-control", id="txtClickURL" })
         </div>
     </div>
-    <div class="col-md-3 col-md-offset-2">
+    <div class="col-md-10 col-md-offset-2">
         <label class="upload-file-button">
             Choose Files
-            <input type="file" name="file" id="file" />
-        </label></div>
+            <input type="file" name="file" id="file" />                        
+        </label>                
+        <div style="display: inline-block; padding-left: 8%;"><input type="text" id="txtFileName" value="No file selected" style="width:350px;" disabled/></div>
+    </div>
+    
     <br /><br />
     <div class="col-md-3 col-md-offset-2">
     <p id="upload-info"> Upload one file at a time. <br />
     Only the following formats are accepted: .psd (Photoshop), .ai (Adobe Illustrator), .indd (InDesign)</p></div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="SUBMIT" id="upload-submit"/>
+            <input type="button" class="btn btn-default" value="SUBMIT" id="upload-submit"/>
         </div>
     </div>
 }
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
         $(function () {
+            $("input:file").change(function () {                
+                var fileName = $(this).val();
+                var lastIndex = fileName.lastIndexOf("\\");
+                if (lastIndex >= 0) {
+                    fileName = fileName.substring(lastIndex + 1);
+                }
+                $("#txtFileName").val(fileName);
+            });
+        });
+        $('#upload-submit').click(function (event) { 
+
+            var canSubmit = false;
+            if (!validateURL($("#txtClickURL").val() )) {              
+           
+                alert('Invalid URL');
+                
+            } else if ($('#ddAsset').length == 0 ) {
+                alert('Asset Required');
+            } else if (validateDT() ) {
+                alert('Invalid Date');
+            } else {
+                canSubmit = true;
+            }
+            if (canSubmit) {
+                $("#ppForm").submit();
+            }
             
-            
+
+
+            return false;
+        });
+        function validateURL(textval) {
+            var urlregex = new RegExp(
+                "^(http:\/\/www.|https:\/\/www.|ftp:\/\/www.|www.){1}([0-9A-Za-z]+\.)");
+            return urlregex.test(textval);
+        }
+        function validateDT()
+        {
+            var sCompare = new Date($("#datepicker").val());
+            var eCompare = new Date($("#dpEnd").val());
+            if (sCompare > eCompare) {
+                return true;
+            }
+
+            return false;
+        }
+        $(function () {
+            $("#datepicker").datepicker();
+            //$("#dpEnd").datepicker();
+            $("#dpEnd").datepicker({
+                numberOfMonths: 1,
+                onSelect: function (selected) {                    
+                    var sCompare = new Date( $("#datepicker").val() );
+                    var eCompare = new Date( $("#dpEnd").val() );
+                    if (sCompare > eCompare) {
+                            alert('End date must be greater than start date.')
+                    }
+                }
+
+            });
+        });
+
+        $(function () {
             $('#ddAsset').change(function () {
                 var myVal = $(this).val();
                 if (myVal == 'Social'){
@@ -77,8 +150,11 @@
                     $('#txtCopy').hide();
                     $('#txtHL').hide();
                 }
-            
+
+            });
         });
-    });</script>
+
+
+    </script>
 }
 

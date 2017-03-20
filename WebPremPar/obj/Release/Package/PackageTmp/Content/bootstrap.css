@@ -1395,7 +1395,7 @@ pre code {
 
 table {
   max-width: 100%;
-  background-color: transparent;
+  background-color: white !important;
 }
 
 th {

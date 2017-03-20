@@ -59,13 +59,14 @@
     font-size: 10px; 
     margin-bottom: -2%;
 }
-
+input[type="file"] {
+    display: none;
+}
 .upload-file-button [type=file] {
-    /*opacity: 0;*/
-    position: absolute;
+    /*position: absolute;
     z-index: -1;
     top: 4px;
-    left: 47px;   
+    left: 47px;*/   
 }
 .upload-file-button {
     background-color: yellow;
@@ -107,4 +108,7 @@
     text-decoration: underline;
     color: black; 
     cursor:pointer;
+}
+.ui-datepicker-next .ui-corner-all{
+    padding-left:5% !important;
 }

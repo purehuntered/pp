@@ -3,4 +3,17 @@
 }
 
 <div class="page-title">@ViewBag.Title</div>
+<div>@Html.ActionLink("Upload another file here", "Index", "Upload", null, null)</div>
+@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul>            
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    }
+}
 

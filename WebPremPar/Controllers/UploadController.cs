@@ -39,6 +39,8 @@ namespace WebPremPar.Views.Home
                         {
                             var fileName = Path.GetFileName(file.FileName);
                             var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
+                            DateTime startDt = Convert.ToDateTime(Request.Params["StartDt"].ToString());
+                            DateTime endDt = Convert.ToDateTime(Request.Params["EndDt"].ToString());
                             file.SaveAs(path);
                             var u = new Upload();
                             u.ID = Guid.NewGuid();
@@ -48,6 +50,11 @@ namespace WebPremPar.Views.Home
                             u.UserLog = System.Web.HttpContext.Current.User.Identity.Name;
                             u.StartDT = Convert.ToDateTime( Request.Params["StartDt"].ToString() );
                             u.EndDT = Convert.ToDateTime( Request.Params["EndDt"].ToString() );
+                            //if (CompareDt(startDt, endDt) )
+                            //{
+                            //    Session["errMsg"] = "10";
+                            //    return RedirectToAction("Index", "Upload");
+                            //}
                             u.FileName = fileName;
                             if ( Request.Params["txtCopy"] != null )
                             {
@@ -68,11 +75,13 @@ namespace WebPremPar.Views.Home
                         }
                         else
                         {
+                            Session["errMsg"] = "10";
                             return RedirectToAction("Index", "Upload");
                         }
                     }
                     else
                     {
+                        Session["errMsg"] = "10";
                         return RedirectToAction("Index", "Upload");
                     }
                 }
@@ -89,6 +98,16 @@ namespace WebPremPar.Views.Home
 
             return View();
 
+        }
+
+        private bool CompareDt(DateTime date1, DateTime date2)
+        {
+            int result = DateTime.Compare(date1, date2);            
+
+            if (result > 0)
+                return true;
+
+            return true;
         }
 
         private void SetEmailVnd(Upload u,string File, string Email)

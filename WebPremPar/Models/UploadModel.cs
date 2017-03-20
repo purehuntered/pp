@@ -18,12 +18,14 @@ namespace WebPremPar.Models
         [Display(Name = "Click Through URL*")]
         public string ClickURL { get; set; }        
         public string UserLog { get; set; }
-        [Display(Name = "End Date*")]
+        [Display(Name = "Start Date*")]        
         [Required]
+        [DataType(DataType.Date)]
         public DateTime StartDt { get; set; }
         [Display(Name = "End Date*")]
         [Required]
+        [DataType(DataType.Date)]
         public DateTime EndDt { get; set; }
         public string FileName { get; set; }
-    }
+    }    
 }
